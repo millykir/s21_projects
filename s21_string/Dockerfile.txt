@@ -1,0 +1,24 @@
+FROM ubuntu:jammy-20220421
+#FROM arm64v8/alpine:3.16
+
+RUN  apt-get update -y && apt install -y\
+    git \
+    git-lfs \
+    curl \
+    jq \
+    bash \
+    build-essential \
+    python3 \
+    valgrind \
+    cppcheck \
+    libghc-regex-pcre-dev \
+    clang-tools \
+    check \
+    lcov \
+    xdg-utils
+
+COPY . /src
+
+WORKDIR "/src"
+
+ENTRYPOINT ["/bin/bash"]
