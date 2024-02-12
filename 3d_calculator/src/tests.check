@@ -1,0 +1,199 @@
+#include "s21_calc.h"
+
+#test polish_note_1
+char* str = "15 + 5 - 2";
+long double ref = 15 + 5 - 2;
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_2
+char* str = "15 + 5 * 2";
+long double ref = 15 + 5 * 2;
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_3
+char* str = "15 + 5 - 2 + 10 - 8 + 11 - 21 * 3 + 3";
+long double ref = 15 + 5 - 2 + 10 - 8 + 11 - 21 * 3 + 3;
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_4
+char* str = "1.5 + 12.3 - 11.9 + 654.87 * 2.5 / 3";
+long double ref = 1.5 + 12.3 - 11.9 + 654.87 * 2.5 / 3;
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_5
+char* str = "12 - 6 ^ 2 * 1.5 + 2.28";
+long double ref = 12 - pow(6, 2) * 1.5 + 2.28;
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_6
+char* str = "24 / 6 + 12 - 6 ^ 2 * 1.5 + 2.28";
+long double ref = 24 / 6 + 12 - pow(6, 2) * 1.5 + 2.28;
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_7
+char* str = "13.37 + 7.44 * 4 - 35  / 16.0 + 5";
+long double ref = 13.37 + 7.44 * 4 + -35 / 16.0 - -5;
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_8
+char* str = "2 + (3 - 1) + 4";
+long double ref = 2 + (3 - 1) + 4;
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_9
+char* str = "2 + (3 - 4 / 2 + 1) + 4";
+long double ref = 2 + (3 - 4 / 2 + 1) + 4;
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_10
+char* str = "13.37 + 7.44 * 4 - (13 * 2 - 61.13 / 2) -35 / 16 + 5";
+long double ref = 13.37 + 7.44 * 4 - (13 * 2 - 61.13 / 2) + -35 / 16 - -5;
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_11
+char* str = "cos(5)";
+long double ref = cos(5);
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_12
+char* str = "cos(61.13 / 2)";
+long double ref = cos(61.13 / 2);
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_13
+char* str = "13.37 + 7.44 * 4 - cos(1) -35 / 16 + 5";
+long double ref = 13.37 + 7.44 * 4 - cos(13 * 2 + 61.13 / 2) - 35 / 16 + 5;
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_14
+char* str = "-cos(1) / (13 - 11) + log(2)";
+long double ref = -cos(1) / (13 - 11) + log10(2);
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_15
+char* str = "3mod2 + 3159 + 12.4 + 2 ^ 6 ";
+long double ref = 3 % 2 + 3159 + 12.4 + pow(2, 6);
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_16
+char* str = "2 + 3^2";
+long double ref = 11;
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_17
+char* str = "5mod6";
+long double ref = fmod(5, 6);
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_18
+char* str = "5mod(6)";
+long double ref = fmod(5, 6);
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_19
+char* str = "sin(2)";
+long double ref = sin(2);
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_20
+char* str = "ln(2)";
+long double ref = log(2);
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_21
+char* str = "0^2";
+long double ref = pow(0, 2);
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_22
+char* str = "asin(2)";
+long double ref = asin(2);
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_23
+char* str = "acos(2)";
+long double ref = acos(2);
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_24
+char* str = "atan(2)";
+long double ref = atan(2);
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_25
+char* str = "log(2)";
+long double ref = log10(2);
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_26
+char* str = "ln(2)";
+long double ref = log(2);
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_27
+char* str = "sqrt(3+7*8/20)";
+long double ref = sqrt(3 + 7 * 8 / 20);
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_28
+char* str = "2+*3";
+long double ref = 0;
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_29
+char* str = "*3 3 (";
+long double ref = 0;
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_30
+char* str = "cos";
+long double ref = 0;
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_31
+char* str = "cos(0)";
+long double ref = 1;
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_32
+char* str = "cos sin";
+long double ref = 0;
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_33
+char* str = "cos)";
+long double ref = 0;
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_34
+char* str = "*)";
+long double ref = 0;
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_35
+char* str = "5*-6";
+long double ref = 0;
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_36
+char* str = "(*";
+long double ref = 0;
+ck_assert_int_eq(ref, convertToRPN(str));
+
+#test polish_note_37
+int months = 5;
+double interest_rate = 5;
+double loan_amount = 5000;
+double x = calculate_annuity_payment(months, interest_rate, loan_amount);
+double y = 1012;
+ck_assert_int_eq(x, y);
+
+#test polish_note_38
+int months = 5;
+double interest_rate = 5;
+double loan_amount = 5000;
+double payments[300];
+double x = calculate_differentiated_payment(months, interest_rate, loan_amount,
+                                            payments);
+double y = 5076;
+ck_assert_int_eq(x, y);
